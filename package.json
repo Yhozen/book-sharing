@@ -22,6 +22,7 @@
     "@next-auth/mongodb-adapter": "0.0.2-next.285",
     "@storyofams/next-api-decorators": "^1.6.0",
     "@typegoose/typegoose": "^9.2.0",
+    "axios": "^0.27.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "cookie": "^0.4.1",
