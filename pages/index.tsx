@@ -2,7 +2,9 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { Button } from 'components/button'
+import { Card, Text, Input, Button, Grid } from '@geist-ui/core'
+import styled from 'styled-components'
+import tw from 'twin.macro'
 
 type FormValues = {
   isbn: string
@@ -17,32 +19,42 @@ const schema: yup.SchemaOf<FormValues> = yup
   })
   .required()
 
+const Container = styled.div`
+  ${tw`flex h-screen justify-center items-center`};
+`
+
 const HomePage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver: yupResolver(schema) })
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  })
 
   const onSubmit = handleSubmit(async data => {
     const res = await fetch(`/api/book/get/${data.isbn}`)
     const bookData = await res.json()
 
-    alert(bookData)
-    console.log('ye')
+    alert(JSON.stringify(bookData))
   })
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input {...register('isbn')} />
-        <p>{errors.isbn?.message}</p>
+    <Container>
+      <Grid.Container gap={2} justify="center">
+        <Grid xs={6} height="200px">
+          <Card shadow>
+            <form onSubmit={onSubmit}>
+              <Input placeholder="ISBN Code" {...register('isbn')} />
+              <Text type="error">{errors.isbn?.message}</Text>
 
-        <input type="submit" />
-      </form>
-      <p>gola</p>
-      <Button variant="primary">hola</Button>
-    </>
+              <Button htmlType="submit">Submit</Button>
+            </form>
+          </Card>
+        </Grid>
+      </Grid.Container>
+    </Container>
   )
 }
 

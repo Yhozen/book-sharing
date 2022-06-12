@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { ExtendedPage } from 'models/app.model'
 import { AppProps } from 'next/dist/shared/lib/router/router'
 import { GlobalStyles } from 'styles/global-styles'
+import { GeistProvider, CssBaseline } from '@geist-ui/core'
 
 type MyAppProps<PassedProps> = AppProps & {
   Component: ExtendedPage<PassedProps>
@@ -15,7 +16,11 @@ const MyApp: FC<MyAppProps<Record<string, never>>> = ({
 
   return getLayout(
     <>
-      <Component {...pageProps} />
+      <GeistProvider>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </GeistProvider>
+
       <GlobalStyles />
     </>,
   )

@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/core": "^2.3.8",
     "@geist-ui/react": "^2.2.0",
     "@geist-ui/react-icons": "^1.0.1",
     "@google-cloud/storage": "^5.15.3",
@@ -20,6 +21,7 @@
     "@magic-sdk/admin": "^1.3.2",
     "@meanie/mongoose-to-json": "^2.6.0",
     "@next-auth/mongodb-adapter": "0.0.2-next.285",
+    "@nextui-org/react": "^1.0.0-beta.9",
     "@storyofams/next-api-decorators": "^1.6.0",
     "@typegoose/typegoose": "^9.2.0",
     "axios": "^0.27.2",

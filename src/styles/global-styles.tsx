@@ -16,10 +16,12 @@ const CustomStyles = createGlobalStyle`
             monospace;
     }
 
-    html,
-    body {
+    html, 
+    body, #__next {
         margin: 0;
         padding: 0;
+        height:100%;
+        min-width:100%;
     }
 `
 
