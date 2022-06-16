@@ -1,8 +1,8 @@
 import { FC } from 'react'
+import { CssBaseline, GeistProvider } from '@geist-ui/core'
 import { ExtendedPage } from 'models/app.model'
 import { AppProps } from 'next/dist/shared/lib/router/router'
 import { GlobalStyles } from 'styles/global-styles'
-import { GeistProvider, CssBaseline } from '@geist-ui/core'
 
 type MyAppProps<PassedProps> = AppProps & {
   Component: ExtendedPage<PassedProps>
