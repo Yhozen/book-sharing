@@ -1,22 +1,7 @@
 import { createHandler, Get, Param } from '@storyofams/next-api-decorators'
 import axios from 'axios'
+import { Book } from 'models/book.model'
 import { WithMongo } from 'server/middlewares/mongo.middleware'
-
-type Book = {
-  publisher: string
-  language: string
-  image: string
-  title_long: string
-  dimensions: string
-  pages: number
-  date_published: string
-  authors: string[]
-  title: string
-  isbn13: string
-  msrp: string
-  binding: string
-  isbn: string
-}
 
 class JobHandler {
   @WithMongo()
