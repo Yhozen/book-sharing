@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Card, Grid, Input, Text } from '@geist-ui/core'
+import { Button, Card, Grid, Image, Input, Text } from '@geist-ui/core'
 import { yupResolver } from '@hookform/resolvers/yup'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -22,7 +23,27 @@ const Container = styled.div`
   ${tw`flex h-screen justify-center items-center`};
 `
 
+type Book = {
+  publisher: string
+  language: string
+  format: string
+  image: string
+  title_long: string
+  edition: string
+  dimensions: string
+  pages: number
+  date_published: string
+  subjects: string[]
+  authors: string[]
+  title: string
+  isbn13: string
+  msrp: string
+  binding: string
+  isbn: string
+}
+
 const HomePage = () => {
+  const [book, setBook] = useState<Book>(null)
   const {
     register,
     handleSubmit,
@@ -34,9 +55,9 @@ const HomePage = () => {
 
   const onSubmit = handleSubmit(async data => {
     const res = await fetch(`/api/book/get/${data.isbn}`)
-    const bookData = await res.json()
+    const bookData: Book = await res.json()
 
-    alert(JSON.stringify(bookData))
+    setBook(bookData)
   })
 
   return (
@@ -52,6 +73,17 @@ const HomePage = () => {
             </form>
           </Card>
         </Grid>
+        {!!book && (
+          <Grid xs={6} height="200px">
+            <Card shadow>
+              <Text h3>{book.title}</Text>
+              <Text>{book.subjects.join(' | ')}</Text>
+
+              <Text>{book.authors.join(' - ')}</Text>
+              <Image width="280px" height="160px" src={book.image} />
+            </Card>
+          </Grid>
+        )}
       </Grid.Container>
     </Container>
   )
