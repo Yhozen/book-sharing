@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Button, Card, Grid, Image, Input, Text } from '@geist-ui/core'
+import { Button, Card, Grid, Input, Text } from '@geist-ui/core'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Book } from 'models/book.model'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import * as yup from 'yup'
+
+import { BookComponent } from 'components/book'
 
 type FormValues = {
   isbn: string
@@ -57,13 +59,7 @@ const HomePage = () => {
         </Grid>
         {!!book && (
           <Grid xs={6} height="200px">
-            <Card shadow>
-              <Text h3>{book.title}</Text>
-              <Text>{book.subjects.join(' | ')}</Text>
-
-              <Text>{book.authors.join(' - ')}</Text>
-              <Image width="280px" height="160px" src={book.image} />
-            </Card>
+            <BookComponent book={book} />
           </Grid>
         )}
       </Grid.Container>
