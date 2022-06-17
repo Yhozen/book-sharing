@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Card, Grid, Image, Input, Text } from '@geist-ui/core'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Book } from 'models/book.model'
 import styled from 'styled-components'
 import tw from 'twin.macro'
 import * as yup from 'yup'
@@ -22,25 +23,6 @@ const schema: yup.SchemaOf<FormValues> = yup
 const Container = styled.div`
   ${tw`flex h-screen justify-center items-center`};
 `
-
-type Book = {
-  publisher: string
-  language: string
-  format: string
-  image: string
-  title_long: string
-  edition: string
-  dimensions: string
-  pages: number
-  date_published: string
-  subjects: string[]
-  authors: string[]
-  title: string
-  isbn13: string
-  msrp: string
-  binding: string
-  isbn: string
-}
 
 const HomePage = () => {
   const [book, setBook] = useState<Book>(null)
