@@ -1,9 +1,28 @@
-import { createHandler, Get, Param } from '@storyofams/next-api-decorators'
+import {
+  Body,
+  createHandler,
+  Get,
+  Param,
+  Post,
+  ValidationPipe,
+} from '@storyofams/next-api-decorators'
 import axios from 'axios'
 import { Book } from 'models/book.model'
+import { CreateBookDTO } from 'server/dto/book/create-book.dto'
+import { Auth } from 'server/middlewares/auth.middleware'
 import { WithMongo } from 'server/middlewares/mongo.middleware'
+import { BookModel } from 'server/models/book.model'
 
-class JobHandler {
+class BookHandler {
+  @Auth()
+  @WithMongo()
+  @Post('/create')
+  async createUser(@Body(ValidationPipe) body: CreateBookDTO): Promise<Book> {
+    const book = await BookModel.create(body)
+
+    return book
+  }
+
   @WithMongo()
   @Get('/get/:isbn')
   async get(@Param('isbn') isbn: string): Promise<Book> {
@@ -17,4 +36,4 @@ class JobHandler {
   }
 }
 
-export default createHandler(JobHandler)
+export default createHandler(BookHandler)
