@@ -34,6 +34,8 @@ class Book implements BookType {
   binding?: string
   @prop()
   isbn?: string
+  @prop()
+  owner: string
 }
 
 export const BookModel = getModelForClass(Book)
