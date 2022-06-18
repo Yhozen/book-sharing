@@ -6,7 +6,6 @@ import {
   Post,
   ValidationPipe,
 } from '@storyofams/next-api-decorators'
-import axios from 'axios'
 import { Book } from 'models/book.model'
 import { CreateBookDTO } from 'server/dto/book/create-book.dto'
 import { Auth } from 'server/middlewares/auth.middleware'
@@ -16,6 +15,7 @@ import {
   CurrentUser,
   MagicUser,
 } from 'server/param-decorators/current-user.decorator'
+import * as isbndbService from 'server/services/isbndb.service'
 
 class BookHandler {
   @Auth()
@@ -33,13 +33,9 @@ class BookHandler {
   @WithMongo()
   @Get('/get/:isbn')
   async get(@Param('isbn') isbn: string): Promise<Book> {
-    const res = await axios.get(`https://api2.isbndb.com/book/${isbn}`, {
-      headers: {
-        Authorization: process.env.ISBNDB_API_KEY,
-      },
-    })
+    const book = await isbndbService.get(isbn)
 
-    return res.data?.book ?? {}
+    return book
   }
 }
 
