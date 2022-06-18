@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Card, Grid, Input, Text } from '@geist-ui/core'
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import { ExtendedPage } from 'models/app.model'
 import { Book } from 'models/book.model'
 import styled from 'styled-components'
@@ -39,10 +40,9 @@ const HomePage: ExtendedPage = () => {
   })
 
   const onSubmit = handleSubmit(async data => {
-    const res = await fetch(`/api/book/get/${data.isbn}`)
-    const bookData: Book = await res.json()
+    const res = await axios.get<Book>(`/api/book/get/${data.isbn}`)
 
-    setBook(bookData)
+    setBook(res.data)
   })
 
   return (
