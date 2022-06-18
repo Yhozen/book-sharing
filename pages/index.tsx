@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Card, Grid, Input, Text } from '@geist-ui/core'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { ExtendedPage } from 'models/app.model'
 import { Book } from 'models/book.model'
 import styled from 'styled-components'
 import tw from 'twin.macro'
@@ -26,7 +27,7 @@ const Container = styled.div`
   ${tw`flex h-screen justify-center items-center`};
 `
 
-const HomePage = () => {
+const HomePage: ExtendedPage = () => {
   const [book, setBook] = useState<Book>(null)
   const {
     register,
@@ -66,5 +67,7 @@ const HomePage = () => {
     </Container>
   )
 }
+
+HomePage.pageName = 'Home'
 
 export default HomePage
