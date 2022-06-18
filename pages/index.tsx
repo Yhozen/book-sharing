@@ -40,7 +40,7 @@ const HomePage: ExtendedPage = () => {
   })
 
   const onSubmit = handleSubmit(async data => {
-    const res = await axios.get<Book>(`/api/book/get/${data.isbn}`)
+    const res = await axios.post<Book>(`/api/book/ISBN/create`, data)
 
     setBook(res.data)
   })
