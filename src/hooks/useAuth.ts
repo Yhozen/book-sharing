@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { logout } from 'helpers/logout'
 import { useRouter } from 'next/router'
+import type { MagicUser } from 'server/param-decorators/current-user.decorator'
 import useSWR from 'swr'
 
 const fetcher = async (route: string) => {
   /* our token cookie gets sent with this request */
   try {
     const response = await fetch(route)
-    const user = await response.json()
+    const user: MagicUser = await response.json()
 
     return user || null
   } catch (error) {
